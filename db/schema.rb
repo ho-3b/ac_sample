@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_04_063832) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_04_071435) do
   create_table "chat_members", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "room_id", null: false
@@ -18,6 +18,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_063832) do
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_chat_members_on_room_id"
     t.index ["user_id"], name: "index_chat_members_on_user_id"
+  end
+
+  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "rooms", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -37,4 +47,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_063832) do
 
   add_foreign_key "chat_members", "rooms"
   add_foreign_key "chat_members", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
 end
