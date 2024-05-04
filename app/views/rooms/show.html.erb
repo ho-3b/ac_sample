@@ -1,2 +1,10 @@
-<h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
+<div class="card" style="width: 40rem;">
+  <div class="card-header">
+    <h1><%= @room.name %></h1>
+  </div>
+  <div class="card-body">
+    <div>
+      <%= render @messages %>
+    </div>
+  </div>
+</div>
