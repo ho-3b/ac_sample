@@ -3,6 +3,10 @@
     <h1><%= @room.name %></h1>
   </div>
   <div class="card-body">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="メッセージを入力" aria-describedby="button-addon2">
+      <button class="btn btn-primary" type="button" data-behavior="room_speaker">送信</button>
+    </div>
     <div>
       <%= render @messages %>
     </div>
