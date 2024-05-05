@@ -1,13 +1,21 @@
+<style>
+  .user-<%= current_user.id %> {
+      background-color: #ceefd1;
+      float: right !important;
+  }
+</style>
 <div class="card" style="width: 40rem;">
   <div class="card-header">
     <h1><%= @room.name %></h1>
+    <%= @room.users.filter{|i| i.id != current_user.id}.first.name %>さんとのチャット部屋（部屋ID: <%= @room.id %>）
   </div>
   <div class="card-body">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="メッセージを入力" aria-describedby="button-addon2">
-      <button class="btn btn-primary" type="button" data-behavior="room_speaker">送信</button>
+      <input type="hidden" id="room_id" value="<%= @room.id %>">
+      <input type="text" id="message" class="form-control" placeholder="メッセージを入力" aria-describedby="button-addon2">
+      <button class="btn btn-primary" id="send" type="button" data-behavior="room_speaker">送信</button>
     </div>
-    <div>
+    <div class="row" id="timeline">
       <%= render @messages %>
     </div>
   </div>

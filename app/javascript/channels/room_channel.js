@@ -1,6 +1,6 @@
 import consumer from "channels/consumer"
 
-consumer.subscriptions.create("RoomChannel", {
+const appRoom = consumer.subscriptions.create("RoomChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
   },
@@ -10,10 +10,20 @@ consumer.subscriptions.create("RoomChannel", {
   },
 
   received(data) {
-    // Called when there's incoming data on the websocket for this channel
+    let parser = new DOMParser();
+    let doc = parser.parseFromString(data['message'], 'text/html');
+    document.getElementById("timeline").prepend(doc.body.firstElementChild);
   },
 
-  speak: function() {
-    return this.perform('speak');
+  speak: function(message, room_id) {
+    return this.perform('speak', {message: message, room_id: room_id});
   }
+});
+
+let button = document.getElementById("send")
+button.addEventListener('click', function () {
+  let message = document.getElementById("message");
+  let room_id = document.getElementById("room_id");
+  appRoom.speak(message.value, room_id.value);
+  message.value = "";
 });

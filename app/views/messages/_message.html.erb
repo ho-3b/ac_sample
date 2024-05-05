@@ -1,5 +1,7 @@
-<div class="message alert text-dark alert-<%= message.user_id == current_user.id ? 'success float-end' : 'light' %>" style="width: 20rem;">
-  <p><%= message.user.name %></p>
-  <p><%= message.content %></p>
-  <small><%= message.created_at %></small>
+<div class="w-100">
+  <div class="w-50 alert alert-light text-dark user-<%= message.user_id %>">
+    <p><%= message.user.name %></p>
+    <p><%= message.content %></p>
+    <small><%= message.created_at %></small>
+  </div>
 </div>
